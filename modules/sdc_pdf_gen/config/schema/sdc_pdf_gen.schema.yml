@@ -1,0 +1,16 @@
+sdc_pdf_gen.settings:
+  type: config_object
+  label: 'SDC PDF Gen settings'
+  mapping:
+    node_type:
+      type: string
+      label: 'Content type to create'
+    target_field:
+      type: string
+      label: 'Field to store SDC layout JSON'
+    status_on_create:
+      type: integer
+      label: 'Publish status (0 = draft, 1 = published)'
+    bedrock_model_id:
+      type: string
+      label: 'Bedrock model ID'

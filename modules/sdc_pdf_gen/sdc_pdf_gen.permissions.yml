@@ -1,0 +1,4 @@
+upload pdfs for sdc generation:
+  title: 'Upload PDFs for SDC generation'
+  description: 'Allow a user to upload a PDF and trigger Bedrock mapping.'
+  restrict access: false

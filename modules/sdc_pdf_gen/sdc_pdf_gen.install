@@ -1,0 +1,18 @@
+<?php
+/** @file */
+
+
+use Drupal\Core\Config\ConfigFactoryInterface;
+
+
+/**
+* Implements hook_install().
+*/
+function sdc_pdf_gen_install() : void {
+\Drupal::configFactory()->getEditable('sdc_pdf_gen.settings')
+->set('node_type', 'page')
+->set('target_field', 'field_sdc_layout_json')
+->set('status_on_create', 0) # keep as draft by default
+->set('bedrock_model_id', 'anthropic.claude-3-5-sonnet-20240620-v1:0')
+->save();
+}

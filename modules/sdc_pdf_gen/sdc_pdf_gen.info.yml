@@ -1,0 +1,9 @@
+name: 'SDC PDF Generator'
+type: module
+package: 'AI / Bedrock'
+core_version_requirement: '^10 || ^11'
+dependencies:
+- drupal:file
+- drupal:system
+- drupal:node
+- drupal:layout_builder # optional if you want LB interop

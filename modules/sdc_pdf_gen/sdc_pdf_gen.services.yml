@@ -1,0 +1,12 @@
+services:
+  sdc_pdf_gen.bedrock_mapper:
+    class: Drupal\sdc_pdf_gen\Service\BedrockMapper
+    arguments: ['@config.factory', '@logger.channel.sdc_pdf_gen']
+
+  sdc_pdf_gen.sdc_page_builder:
+    class: Drupal\sdc_pdf_gen\Service\SdcPageBuilder
+    arguments: ['@entity_type.manager', '@renderer', '@logger.channel.sdc_pdf_gen', '@config.factory']
+
+  logger.channel.sdc_pdf_gen:
+    parent: logger.channel_base
+    arguments: ['sdc_pdf_gen']

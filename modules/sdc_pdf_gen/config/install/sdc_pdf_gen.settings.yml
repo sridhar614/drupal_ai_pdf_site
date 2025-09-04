@@ -1,0 +1,4 @@
+node_type: page
+status_on_create: 0
+bedrock_model_id: anthropic.claude-3-5-sonnet-20240620-v1:0
+target_field: field_sdc_layout_json

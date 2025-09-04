@@ -4,8 +4,8 @@
 
 # Contrib (keep only custom)
 modules/*
-!modules/custom/
-!modules/custom/**
+!modules/sdc_pdf_gen/
+
 
 themes/*
 !themes/custom/

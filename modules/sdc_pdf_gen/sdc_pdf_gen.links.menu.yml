@@ -1,0 +1,7 @@
+sdc_pdf_gen.admin:
+  title: 'PDF → SDC Generator'
+  description: 'Upload a PDF and generate a draft SDC page.'
+  route_name: sdc_pdf_gen.upload
+  parent: system.admin_content
+  weight: 10
+  menu_name: admin

@@ -1,0 +1,7 @@
+sdc_pdf_gen.upload:
+  path: '/admin/content/sdc-pdf'
+  defaults:
+    _title: 'PDF → SDC Generator'
+    _form: '\Drupal\sdc_pdf_gen\Form\PdfUploadForm'
+  requirements:
+    _permission: 'upload pdfs for sdc generation'

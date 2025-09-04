@@ -9,11 +9,15 @@
         "chat": "https://www.drupal.org/node/314178"
     },
     "require": {
+        "aws/aws-sdk-php": "^3.320",
         "composer/installers": "^2.3",
-        "drupal/core": "self.version",
-        "drupal/core-project-message": "self.version",
+        "drupal/core": "11.2.3",
+        "drupal/core-composer-scaffold": "11.2.3",
+        "drupal/core-project-message": "11.2.3",
         "drupal/core-recipe-unpack": "self.version",
-        "drupal/core-vendor-hardening": "self.version"
+        "drupal/core-recommended": "11.2.3",
+        "drupal/core-vendor-hardening": "self.version",
+        "drush/drush": "^13.6"
     },
     "conflict": {
         "dealerdirect/phpcodesniffer-composer-installer": "1.1.0"
@@ -65,6 +69,7 @@
         "allow-plugins": {
             "composer/installers": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/core-recipe-unpack": true,
             "drupal/core-vendor-hardening": true,

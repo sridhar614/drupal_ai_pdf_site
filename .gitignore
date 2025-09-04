@@ -1,53 +1,35 @@
-# macOS
-.DS_Store
+# Composer-managed
+/core/
+/vendor/
 
-# IDEs
-.idea/
-.vscode/
-*.iml
+# Contrib (keep only custom)
+modules/*
+!modules/custom/
+!modules/custom/**
 
-# Node / frontend
-node_modules/
-dist/
-build/
-.storybook-out/
-storybook-static/
-coverage/
+themes/*
+!themes/custom/
+!themes/custom/**
 
-# Logs & env
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-.env
-.env.*.local
+profiles/*
+!profiles/custom/
+!profiles/custom/**
 
-# Java / Gradle / Maven
-target/
-.build/
-.gradle/
-out/
-
-# Drupal (composer-based)
-vendor/
-web/sites/*/files/
-web/sites/*/private/
-web/sites/default/settings*.php
-web/sites/default/services*.yml
-
-# Drupal (docroot-based)
+# Drupal writable & secrets
 sites/*/files/
 sites/*/private/
 sites/default/settings*.php
 sites/default/services*.yml
-core/
-libraries/
-modules/contrib/
-themes/contrib/
 
-core/*
-vendor/*
-themes/*
-
-
+# Misc
+/libraries/
+/node_modules/
+/coverage/
+/dist/
+/build/
+/storybook-static/
+/.DS_Store
+.idea/
+.vscode/
+*.log
+.env*

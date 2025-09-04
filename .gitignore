@@ -1,0 +1,53 @@
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.storybook-out/
+storybook-static/
+coverage/
+
+# Logs & env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.*.local
+
+# Java / Gradle / Maven
+target/
+.build/
+.gradle/
+out/
+
+# Drupal (composer-based)
+vendor/
+web/sites/*/files/
+web/sites/*/private/
+web/sites/default/settings*.php
+web/sites/default/services*.yml
+
+# Drupal (docroot-based)
+sites/*/files/
+sites/*/private/
+sites/default/settings*.php
+sites/default/services*.yml
+core/
+libraries/
+modules/contrib/
+themes/contrib/
+
+core/*
+vendor/*
+themes/*
+
+

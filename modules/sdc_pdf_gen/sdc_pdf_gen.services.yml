@@ -10,3 +10,13 @@ services:
   logger.channel.sdc_pdf_gen:
     parent: logger.channel_base
     arguments: ['sdc_pdf_gen']
+
+  sdc_pdf_gen.generator:
+    class: 'Drupal\sdc_pdf_gen\Service\AiSiteGenerator'
+    arguments:
+      - '@logger.channel.sdc_pdf_gen'
+      - '@entity_type.manager'
+      - '@file_system'
+      - '@sdc_pdf_gen.bedrock_mapper'
+
+

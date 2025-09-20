@@ -29,16 +29,28 @@ class PdfUploadForm extends FormBase {
 
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['pdf'] = [
-        '#type' => 'managed_file',
-        '#title' => $this->t('Upload PDF'),
-        '#upload_location' => 'public://sdc_pdf_uploads',
-        '#required' => TRUE,
-        '#upload_validators' => [
-          'FileExtension' => ['pdf'],
-        ],
+      '#type' => 'managed_file',
+      '#title' => $this->t('Upload PDF'),
+      '#upload_location' => 'public://sdc_pdf_uploads',
+      '#required' => TRUE,
+      '#upload_validators' => [
+        'FileExtension' => ['pdf', 'docx'],
+        'FileSizeLimit' => 10 * 1024 * 1024, // 10 MB
+      ],
     ];
-      
-
+    
+    $form['dictionary'] = [
+      '#type' => 'managed_file',
+      '#title' => $this->t('Component Dictionary (PDF/Word)'),
+      '#upload_location' => 'public://sdc_pdf_dictionary',
+      '#required' => FALSE,
+      '#upload_validators' => [
+        'FileExtension' => ['pdf', 'docx'],
+        'FileSizeLimit' => 5 * 1024 * 1024, // 5 MB
+      ],
+      '#description' => $this->t('Upload a component dictionary document (optional).'),
+    ];
+    
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Generate SDC Draft Page'),
@@ -50,18 +62,43 @@ class PdfUploadForm extends FormBase {
 
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $fids = $form_state->getValue('pdf');
+    if (!$fids) {
+      $this->messenger()->addError($this->t('No PDF uploaded.'));
+      return;
+    }
+
     $file = File::load(reset($fids));
     $file->setPermanent();
     $file->save();
 
-    // Send the PDF file to Bedrock and get JSON back.
-    $sdcLayout = $this->mapper->mapPdfToSdc($file->getFileUri());
+    // Check if a dictionary file was uploaded.
+    $dictFile = NULL;
+    $dictFids = $form_state->getValue('dictionary');
+    if ($dictFids && is_array($dictFids)) {
+      $dictFile = File::load(reset($dictFids));
+      $dictFile->setPermanent();
+      $dictFile->save();
+    }
+
+    // Call the mapper with or without dictionary.
+    if ($dictFile) {
+      $sdcLayout = $this->mapper->mapPdfWithDictionary(
+        $dictFile->getFileUri(),
+        $file->getFileUri()
+      );
+    } else {
+      $sdcLayout = $this->mapper->mapPdfToSdc(
+        $file->getFileUri()
+      );
+    }
 
     // Create draft node from JSON blocks.
     $node = $this->builder->createPageFromLayout($sdcLayout, [
       'title' => $file->getFilename(),
     ]);
 
-    $this->messenger()->addStatus($this->t('Draft created: @title', ['@title' => $node->label()]));
+    $this->messenger()->addStatus($this->t('Draft created: @title', [
+      '@title' => $node->label(),
+    ]));
   }
 }

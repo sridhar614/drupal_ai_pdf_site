@@ -1,4 +1,12 @@
 node_type: page
-status_on_create: 0
-bedrock_model_id: anthropic.claude-3-5-sonnet-20240620-v1:0
 target_field: field_sdc_layout_json
+status_on_create: 0
+bedrock_model_id: 'anthropic.claude-3-5-sonnet-20240620-v1:0'
+aws_region_kb: us-east-2
+bedrock_kb_id: KB_ID
+bedrock_rag_model_arn: 'arn:aws:bedrock:us-east-2:<ACCOUNT-ID>:inference-profile/us.anthropic.claude-3-5-sonnet-20241022-v2:0'
+aws_access_key_id: <KEY>
+aws_secret_access_key: <SECRET>
+bedrock_rag_model: 'anthropic.claude-3-5-sonnet-20240620-v1:0'
+bedrock_kb_model_arn: "arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0"
+bedrock_inference_profile_arn: "arn:aws:bedrock:us-east-2:<ACCOUNT-ID>:inference-profile/us.anthropic.claude-3-5-sonnet-20241022-v2:0"

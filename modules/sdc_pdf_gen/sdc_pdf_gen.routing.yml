@@ -5,3 +5,11 @@ sdc_pdf_gen.upload:
     _form: '\Drupal\sdc_pdf_gen\Form\PdfUploadForm'
   requirements:
     _permission: 'upload pdfs for sdc generation'
+
+sdc_ai_gen.new_page:
+  path: '/admin/content/ai-new-page'
+  defaults:
+    _form: '\Drupal\sdc_pdf_gen\Form\AiNewPageForm'
+    _title: 'AI: New Page from Brief'
+  requirements:
+    _permission: 'administer nodes'

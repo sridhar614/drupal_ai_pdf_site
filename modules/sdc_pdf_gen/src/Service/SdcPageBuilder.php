@@ -20,25 +20,39 @@ protected ConfigFactoryInterface $configFactory,
 ) {}
 
 
-public function createPageFromLayout(array $blocks, array $overrides = []) : Node {
-$cfg = $this->configFactory->get('sdc_pdf_gen.settings');
-$type = $cfg->get('node_type');
-$field = $cfg->get('target_field');
-$status = (int) $cfg->get('status_on_create');
+/**
+   * Create a basic page with AI-generated HTML in the Body field.
+   */
+  public function createPageFromLayout(array $layout, array $meta = []): Node {
+    // Collect HTML from blocks
+    $html = '';
+    foreach ($layout as $block) {
+      if (isset($block['props']['html'])) {
+        $html .= $block['props']['html'] . "\n";
+      }
+    }
 
+    // Fallback: if no blocks, just show a message
+    if (trim($html) === '') {
+      $html = '<p>No content generated.</p>';
+    }
 
-$title = $overrides['title'] ?? 'Generated Page';
+    $node = Node::create([
+      'type' => 'page', 
+      'title' => $meta['title'] ?? 'Generated Page',
+      'body' => [
+        'value' => $html,
+        'format' => 'full_html',
+      ],
+      'status' => 0,
+    ]);
 
+    $node->save();
+    $this->logger->info('Created draft node @id with title @title', [
+      '@id' => $node->id(),
+      '@title' => $node->label(),
+    ]);
 
-$node = Node::create([
-'type' => $type,
-'title' => $title,
-$field => json_encode($blocks, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT),
-'status' => $status,
-]);
-$node->save();
-
-
-return $node;
-}
+    return $node;
+  }
 }

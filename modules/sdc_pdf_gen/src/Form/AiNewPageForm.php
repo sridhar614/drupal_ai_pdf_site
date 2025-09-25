@@ -20,19 +20,17 @@ class AiNewPageForm extends FormBase {
     $form['title'] = ['#type'=>'textfield','#title'=>$this->t('Title (optional)')];
     $form['brief'] = ['#type'=>'textarea','#title'=>$this->t('Email / Notes / Brief'),'#required'=>TRUE,'#rows'=>10];
   
-    $form['kb_only'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('KB only (no LLM)'),
-      '#default_value' => TRUE,
-    ];
-    $form['use_kb_rag'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Use Knowledge Base (summarize via RetrieveAndGenerate)'),
-        '#default_value' => TRUE,
-    ];
+    // $form['kb_only'] = [
+    //   '#type' => 'checkbox',
+    //   '#title' => $this->t('KB only (no LLM)'),
+    //   '#default_value' => TRUE,
+    // ];
+    // $form['use_kb_rag'] = [
+    //     '#type' => 'checkbox',
+    //     '#title' => $this->t('Use Knowledge Base (summarize via RetrieveAndGenerate)'),
+    //     '#default_value' => TRUE,
+    // ];
   
-    $form['use_kb'] = ['#type'=>'checkbox','#title'=>$this->t('Use Knowledge Base'), '#default_value'=>TRUE];
-    $form['use_web'] = ['#type'=>'checkbox','#title'=>$this->t('Use allowlisted web fallback'), '#default_value'=>FALSE];
     $form['actions']['submit'] = ['#type'=>'submit','#value'=>$this->t('Generate page')];
     return $form;
   }
@@ -42,15 +40,15 @@ class AiNewPageForm extends FormBase {
     $brief  = (string) $state->getValue('brief');
     $useRag = (bool) $state->getValue('use_kb_rag'); // add a checkbox in buildForm
   
-    if ($useRag) {
+ //   if ($useRag) {
     //   $node = $this->gen->createFromBriefKbRag($title ?: NULL, $brief);
     $node = $this->gen->createFromBriefKbOnly($title ?: NULL, $brief);
 
-    } else {
-      // fallback to your KB-only or LLM path
-      $node = $this->gen->createFromBriefKbOnly($title ?: NULL, $brief);
+    // } else {
+    //   // fallback to your KB-only or LLM path
+    //   $node = $this->gen->createFromBriefKbOnly($title ?: NULL, $brief);
 
-    }
+    // }
   
     $this->messenger()->addStatus($this->t('Draft created: @link', [
       '@link' => $node->toLink($node->label())->toString(),
